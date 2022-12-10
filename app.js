@@ -37,17 +37,15 @@ const Render = ()=>{
     item.addEventListener("click", ()=>{
       if(item.innerHTML === ""){
         if (currentPlayer === 1){
-          console.log("render1");
-          Gameboard.gameboard[i] =Game.player1.marker;
+          Gameboard.gameboard[i] = Game.player1.marker;
             item.innerHTML = Game.player1.marker;
-            console.log(Gameboard.gameboard);
             currentPlayer=2;
+            checkIfWins();
         }else{
-          console.log("render2");
-          Gameboard.gameboard[i] =Game.player2.marker;
+          Gameboard.gameboard[i] = Game.player2.marker;
             item.innerHTML = Game.player2.marker;
-            console.log(Gameboard.gameboard);
             currentPlayer = 1;
+            checkIfWins();
         }
       }
     });
@@ -56,9 +54,47 @@ const Render = ()=>{
 
 
 const Game = (()=>{
-
   const player1 = Player("Player 1", "");
   const player2 = Player("Player 2", "");
   return {player1, player2}
-
 })();
+
+function checkIfWins(){
+  const board = Gameboard.gameboard;
+  if       (board[0]==="o" && board[1]==="o" &&board[2]==="o"){
+    console.log("The winner is O")
+  }else if (board[3]==="o" && board[4]==="o" && board[5]==="o") {
+    console.log("The winner is O")
+  }else if (board[6]==="o" && board[7]==="o" && board[8]==="o") {
+    console.log("The winner is O")
+  }else if (board[0]==="o" && board[3]==="o" && board[6]==="o") {
+    console.log("The winner is O")
+  }else if (board[1]==="o" && board[4]==="o" && board[7]==="o") {
+    console.log("The winner is O")
+  }else if (board[2]==="o" && board[5]==="o" && board[8]==="o") {
+    console.log("The winner is O")
+  }else if (board[0]==="o" && board[4]==="o" && board[8]==="o") {
+    console.log("The winner is O")
+  }else if (board[2]==="o" && board[4]==="o" && board[6]==="o") {
+    console.log("The winner is O")
+  }else if (board[0]==="x" && board[1]==="x" &&board[2]==="x"){
+    console.log("the winner is X")
+  }else if (board[3]==="x" && board[4]==="x" && board[5]==="x") {
+    console.log("the winner is X")
+  }else if (board[6]==="x" && board[7]==="x" && board[8]==="x") {
+    console.log("the winner is X")
+  }else if (board[0]==="x" && board[3]==="x" && board[6]==="x") {
+    console.log("the winner is X")
+  }else if (board[1]==="x" && board[4]==="x" && board[7]==="x") {
+    console.log("the winner is X")
+  }else if (board[2]==="x" && board[5]==="x" && board[8]==="x") {
+    console.log("the winner is X")
+  }else if (board[0]==="x" && board[4]==="x" && board[8]==="x") {
+    console.log("the winner is X")
+  }else if (board[2]==="x" && board[4]==="x" && board[6]==="x") {
+    console.log("the winner is X")
+  }else if(board.includes("") === false){
+    console.log("It's a draw")
+  }
+  Render(); //is it nesessary? it works without but why.
+}
