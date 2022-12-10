@@ -10,20 +10,30 @@
 </head>
 <body>
 <div class="container">
-  <div class="select-opponent">
-    <label for="opponent">Select Your Opponent</label>
-    <select name="opponent" id="select-opponent">
-      <option value="Human">Human</option>
-      <option value="PC">PC</option>
-    </select>
+  <div class="selections">
+    <div class="select-opponent">
+      <label for="opponent">Select Your Opponent</label>
+      <select name="opponent" id="select-opponent">
+        <option value="Human">Human</option>
+        <option value="PC">PC</option>
+      </select>
+    </div>
+    <div class="select-difficulty">
+      <label for="opponent">Select Difficulty</label>
+      <select name="difficulty" id="select-difficulty">
+        <option value="medium">Medium</option>
+        <option value="unbeatible">Unbeatible</option>
+      </select>
+    </div>
   </div>
+
 
   <div class="choose-mark">
     <div class="x-mark">
-      <button type="button" name="button">x</button>
+      <button type="button" name="button">X</button>
     </div>
     <div class="o-mark">
-      <button type="button" name="button">o</button>
+      <button type="button" name="button">O</button>
     </div>
   </div>
 
@@ -38,8 +48,9 @@
     <div class="grid-item"></div>
     <div class="grid-item"></div>
   </div>
-
-  <button type="button" name="button">Restart</button>
+  <div class="restart">
+    <button type="button" name="button">Restart</button>
+  </div>
 </div>
 </body>
 </html>

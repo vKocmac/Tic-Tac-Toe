@@ -6,9 +6,9 @@ font-weight: 300;
 }
 
 .container{
-display: flex;
-justify-content:center;
-flex-direction: column;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows: 1fr 3fr 1fr;
 align-items: center;
 margin: 0 auto;
 height: 80vh;
@@ -18,7 +18,16 @@ padding: 30px 0;
 margin-top: 50px;
 color:grey;
 }
+.selections{
+  grid-column: 1/2;
+  grid-row: 2/3;
+  margin-bottom: 100px;
+}
 
+.choose-mark{
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
 .game-board{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(125px,1fr));
@@ -27,6 +36,14 @@ color:grey;
   border-style: none;
   margin-top: 20px;
   padding-bottom: 20px;
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+.restart{
+  display: grid;
+  grid-column: 2/3;
+  grid-row: 3/4;
+  justify-content: center;
 }
 
 .game-board div{
@@ -110,5 +127,12 @@ font-size: 1rem;
   flex-direction: column;
   align-items: center;
   margin-left: 20px;
-
+}
+.select-difficulty{
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 20px;
+  margin-top:50px;
 }
