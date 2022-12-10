@@ -10,6 +10,14 @@
 </head>
 <body>
 <div class="container">
+  <div class="select-opponent">
+    <label for="opponent">Select Your Opponent</label>
+    <select name="opponent" id="select-opponent">
+      <option value="Human">Human</option>
+      <option value="PC">PC</option>
+    </select>
+  </div>
+
   <div class="choose-mark">
     <div class="x-mark">
       <button type="button" name="button">x</button>
@@ -18,6 +26,7 @@
       <button type="button" name="button">o</button>
     </div>
   </div>
+
   <div class="game-board">
     <div class="grid-item"></div>
     <div class="grid-item"></div>
@@ -29,6 +38,8 @@
     <div class="grid-item"></div>
     <div class="grid-item"></div>
   </div>
+
+  <button type="button" name="button">Restart</button>
 </div>
 </body>
 </html>

@@ -19,19 +19,19 @@ const SelectMarker = (()=>{
      Game.player2.marker = "o";
     console.log(Game.player1,Game.player2);
     currentPlayer = 1;
-    Render();
+    playWithHuman();
 
   })
   oButton.addEventListener("click", ()=>{
     Game.player1.marker = "o";
     Game.player2.marker = "x";
     console.log(Game.player1,Game.player2);
-    currentPlayer = 1;
-    Render();
+    currentPlayer = 2;
+    playWithHuman();
   })
 })();
 
-const Render = ()=>{
+const playWithHuman = ()=>{
 
   gridItem.forEach((item, i) => {
     item.addEventListener("click", ()=>{
@@ -96,5 +96,5 @@ function checkIfWins(){
   }else if(board.includes("") === false){
     console.log("It's a draw")
   }
-  Render(); //is it nesessary? it works without but why.
+  playWithHuman(); //is it nesessary? it works without but why.
 }
