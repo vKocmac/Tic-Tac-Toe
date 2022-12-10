@@ -11,6 +11,27 @@ const Player = (name, marker)=>{
   }
 };
 
+const Restart = (()=>{
+  const restart = document.querySelector(".restart");
+  restart.addEventListener("click", ()=>{
+    let currentPlayer;
+    const gameboard = ["","","","","","","","",""];
+    const player1 = Player("Player 1", "");
+    const player2 = Player("Player 2", "");
+
+    gridItem.forEach((item, i) => {
+              item.innerHTML = "";
+    });
+
+    return{
+      gameboard,
+      player1,
+      player2
+    }
+  })
+
+})();
+
 // const Selections = (()=>{
 //   const selectOpp = document.querySelector("#select-opponent")
 //   const selectDif = document.querySelector("#select-difficulty")
