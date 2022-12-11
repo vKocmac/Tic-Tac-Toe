@@ -20,7 +20,7 @@ const Restart = (()=>{
     const player2 = Player("Player 2", "");
 
     gridItem.forEach((item, i) => {
-              item.innerHTML = "";
+      item.innerHTML = "";
     });
 
     return{
@@ -32,7 +32,7 @@ const Restart = (()=>{
 
 })();
 
-// const Selections = (()=>{
+// const Selections = ()=>{
 //   const selectOpp = document.querySelector("#select-opponent")
 //   const selectDif = document.querySelector("#select-difficulty")
 //   const difficulty = selectDif.value;
@@ -41,23 +41,44 @@ const Restart = (()=>{
 //     difficulty,
 //     opponent
 //   }
-//   }
-// )();
+//   };
 
 const SelectMarker = (()=>{
   const xButton = document.querySelector(".x-mark");
   const oButton = document.querySelector(".o-mark");
   xButton.addEventListener("click", ()=>{
+
+    const Selections = (()=>{
+      const selectOpp = document.querySelector("#select-opponent")
+      const selectDif = document.querySelector("#select-difficulty")
+      const difficulty = selectDif.value;
+      const opponent = selectOpp.value;
+      return {
+        difficulty,
+        opponent
+        }
+      })();
+
      Game.player1.marker = "x";
      Game.player2.marker = "o";
     console.log(Game.player1,Game.player2);
     currentPlayer = 1;
-    // console.log(Selections.difficulty);
-    // console.log(Selections.opponent);
     playWithHuman();
 
   })
   oButton.addEventListener("click", ()=>{
+
+    const Selections = (()=>{
+      const selectOpp = document.querySelector("#select-opponent")
+      const selectDif = document.querySelector("#select-difficulty")
+      const difficulty = selectDif.value;
+      const opponent = selectOpp.value;
+      return {
+        difficulty,
+        opponent
+        }
+      })();
+
     Game.player1.marker = "o";
     Game.player2.marker = "x";
     console.log(Game.player1,Game.player2);
