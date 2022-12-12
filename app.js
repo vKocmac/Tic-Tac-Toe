@@ -14,38 +14,24 @@ const Player = (name, marker)=>{
     name, marker
   }
 };
+const restart = document.querySelector(".restart");
+restart.addEventListener("click", ()=>{
+  Restart();
+  });
+const Restart = ()=>{         //debug the restart!!!
 
-const Restart = (()=>{
-  const restart = document.querySelector(".restart");
-  restart.addEventListener("click", ()=>{
-    let currentPlayer;
-    const gameboard = ["","","","","","","","",""];
-    const player1 = Player("Player 1", "");
-    const player2 = Player("Player 2", "");
+    Gameboard.gameboard = ["","","","","","","","",""];
+    // const player1 = Player("Player 1", "");
+    // const player2 = Player("Player 2", "");
 
     gridItem.forEach((item, i) => {
       item.innerHTML = "";
-    });
 
-    return{
-      gameboard,
-      player1,
-      player2
-    }
+
   })
 
-})();
+};
 
-// const Selections = ()=>{
-//   const selectOpp = document.querySelector("#select-opponent")
-//   const selectDif = document.querySelector("#select-difficulty")
-//   const difficulty = selectDif.value;
-//   const opponent = selectOpp.value;
-//   return {
-//     difficulty,
-//     opponent
-//   }
-//   };
 
 const SelectMarker = (()=>{
   const xButton = document.querySelector(".x-mark");
@@ -106,30 +92,16 @@ console.log("You are playing with human being");
     });
   });
 };
-// function randomMove(){
-//     gridItem.forEach((item, i) => {
-//       if(item.innerHTML === ""){
-//         Gameboard.gameboard[(Math.floor(Math.random() * 10))] = Game.player2.marker;
-//         item.innerHTML = Game.player2.marker;
-//         currentPlayer = 1;
-//         checkIfWins();
-//
-//       }
-//         });
-//
-// }
 function randomGrid(){
 for (let i=0;i<=gridItem.length;i++){
   if  (Gameboard.gameboard[randomNumber]!==""){
       randomNumber = Math.floor(Math.random() * 8)+1;
-    }
-}
-
+      }
+  }
   return randomNumber;
 }
 
 const playWithPC = ()=>{
-
 console.log("You are playing with a machine");
 gridItem.forEach((item, i) => {
   item.addEventListener("click", ()=>{
@@ -142,7 +114,7 @@ gridItem.forEach((item, i) => {
           randomGrid();
           console.log(randomNumber);
           if(Gameboard.gameboard[randomNumber]===""){
-            for (i=0;i<=gridItem.length;i++){
+            for (x=0;x<=gridItem.length;x++){
               gridItem[randomNumber].innerHTML = Game.player2.marker;
               Gameboard.gameboard[randomNumber] = Game.player2.marker;
               console.log(Gameboard.gameboard);
@@ -200,10 +172,4 @@ function checkIfWins(){
   }else if(board.includes("") === false){
     console.log("It's a draw")
   }
-  // if(currentPlayer === 1){
-  //   playWithPC();
-  // }else{
-  //   randomMove();
-  // }
-  // playWithHuman(); //is it nesessary? it works without but why.
 }
