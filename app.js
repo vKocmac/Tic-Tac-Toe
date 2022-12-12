@@ -1,5 +1,9 @@
 const gridItem = document.querySelectorAll(".grid-item");
+const selectOpp = document.querySelector("#select-opponent")
+const selectDif = document.querySelector("#select-difficulty")
 let currentPlayer;
+let randomNumber;
+
 const Gameboard = (()=>{
   const gameboard = ["","","","","","","","",""];
   return {gameboard};
@@ -48,47 +52,42 @@ const SelectMarker = (()=>{
   const oButton = document.querySelector(".o-mark");
   xButton.addEventListener("click", ()=>{
 
-    const Selections = (()=>{
-      const selectOpp = document.querySelector("#select-opponent")
-      const selectDif = document.querySelector("#select-difficulty")
-      const difficulty = selectDif.value;
-      const opponent = selectOpp.value;
-      return {
-        difficulty,
-        opponent
-        }
-      })();
+    const difficulty = selectDif.value;
+    const opponent = selectOpp.value;
 
      Game.player1.marker = "x";
      Game.player2.marker = "o";
     console.log(Game.player1,Game.player2);
+    console.log(opponent,difficulty);
     currentPlayer = 1;
-    playWithHuman();
+    if(opponent === "PC"){
+      playWithPC();
+    }else{
+      playWithHuman();
+}
 
   })
   oButton.addEventListener("click", ()=>{
 
-    const Selections = (()=>{
-      const selectOpp = document.querySelector("#select-opponent")
-      const selectDif = document.querySelector("#select-difficulty")
-      const difficulty = selectDif.value;
-      const opponent = selectOpp.value;
-      return {
-        difficulty,
-        opponent
-        }
-      })();
+    const difficulty = selectDif.value;
+    const opponent = selectOpp.value;
 
     Game.player1.marker = "o";
     Game.player2.marker = "x";
     console.log(Game.player1,Game.player2);
+    console.log(opponent,difficulty);
     currentPlayer = 2;
-    playWithHuman();
+    if(opponent === "PC"){
+      playWithPC();
+    }else{
+      playWithHuman();
+    }
+
   })
 })();
 
 const playWithHuman = ()=>{
-
+console.log("You are playing with human being");
   gridItem.forEach((item, i) => {
     item.addEventListener("click", ()=>{
       if(item.innerHTML === ""){
@@ -107,26 +106,54 @@ const playWithHuman = ()=>{
     });
   });
 };
+// function randomMove(){
+//     gridItem.forEach((item, i) => {
+//       if(item.innerHTML === ""){
+//         Gameboard.gameboard[(Math.floor(Math.random() * 10))] = Game.player2.marker;
+//         item.innerHTML = Game.player2.marker;
+//         currentPlayer = 1;
+//         checkIfWins();
+//
+//       }
+//         });
+//
+// }
+function randomGrid(){
+for (let i=0;i<=gridItem.length;i++){
+  if  (Gameboard.gameboard[randomNumber]!==""){
+      randomNumber = Math.floor(Math.random() * 8)+1;
+    }
+}
+
+  return randomNumber;
+}
 
 const playWithPC = ()=>{
 
-  gridItem.forEach((item, i) => {
-    item.addEventListener("click", ()=>{
-      if(item.innerHTML === ""){
-        if (currentPlayer === 1){
-          Gameboard.gameboard[i] = Game.player1.marker;
-            item.innerHTML = Game.player1.marker;
-            currentPlayer=2;
-            checkIfWins();
-        }else{
-          Gameboard.gameboard[i] = Game.player2.marker;
-            item.innerHTML = Game.player2.marker;
-            currentPlayer = 1;
-            checkIfWins();
-        }
+console.log("You are playing with a machine");
+gridItem.forEach((item, i) => {
+  item.addEventListener("click", ()=>{
+    if(item.innerHTML === ""){
+      if (currentPlayer === 1){
+        Gameboard.gameboard[i] = Game.player1.marker;
+          item.innerHTML = Game.player1.marker;
+          currentPlayer=2;
+          checkIfWins();
+          randomGrid();
+          console.log(randomNumber);
+          if(Gameboard.gameboard[randomNumber]===""){
+            for (i=0;i<=gridItem.length;i++){
+              gridItem[randomNumber].innerHTML = Game.player2.marker;
+              Gameboard.gameboard[randomNumber] = Game.player2.marker;
+              console.log(Gameboard.gameboard);
+              currentPlayer = 1;
+              checkIfWins();
+            }
+          }
       }
-    });
+    }
   });
+});
 };
 
 
@@ -173,5 +200,10 @@ function checkIfWins(){
   }else if(board.includes("") === false){
     console.log("It's a draw")
   }
-  playWithHuman(); //is it nesessary? it works without but why.
+  // if(currentPlayer === 1){
+  //   playWithPC();
+  // }else{
+  //   randomMove();
+  // }
+  // playWithHuman(); //is it nesessary? it works without but why.
 }
