@@ -24,6 +24,7 @@ const Restart = ()=>{
     Gameboard.gameboard = ["","","","","","","","",""];
     gridItem.forEach((item, i) => {
     item.innerHTML = "";
+
   })
 };
 
@@ -107,7 +108,8 @@ gridItem.forEach((item, i) => {
           console.log(randomNumber);
           if(Gameboard.gameboard[randomNumber]===""){
             for (x=0;x<=gridItem.length;x++){
-              gridItem[randomNumber].innerHTML = Game.player2.marker;
+              setTimeout(function() {gridItem[randomNumber].innerHTML=Game.player2.marker;}, 500);
+              // gridItem[randomNumber].innerHTML = Game.player2.marker;
               Gameboard.gameboard[randomNumber] = Game.player2.marker;
               console.log(Gameboard.gameboard);
               currentPlayer = 1;
@@ -126,7 +128,8 @@ function fisrtMoveO(){
     console.log(randomNumber);
     if(Gameboard.gameboard[randomNumber]===""){
       for (x=0;x<=gridItem.length;x++){
-        gridItem[randomNumber].innerHTML = Game.player2.marker;
+        setTimeout(function() {gridItem[randomNumber].innerHTML=Game.player2.marker;}, 700);
+        // gridItem[randomNumber].innerHTML = Game.player2.marker;
         Gameboard.gameboard[randomNumber] = Game.player2.marker;
         console.log(Gameboard.gameboard);
         currentPlayer = 1;
@@ -135,6 +138,7 @@ function fisrtMoveO(){
       }
     }
 }
+
 const Game = (()=>{
   const player1 = Player("Player 1", "");
   const player2 = Player("Player 2", "");
