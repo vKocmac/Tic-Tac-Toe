@@ -1,6 +1,7 @@
 const gridItem = document.querySelectorAll(".grid-item");
-const selectOpp = document.querySelector("#select-opponent")
-const selectDif = document.querySelector("#select-difficulty")
+const selectOpp = document.querySelector("#select-opponent");
+const selectDif = document.querySelector("#select-difficulty");
+const body = document.querySelector("body");
 let currentPlayer;
 let randomNumber;
 
@@ -148,38 +149,74 @@ const Game = (()=>{
 function checkIfWins(){
   const board = Gameboard.gameboard;
   if       (board[0]==="o" && board[1]==="o" &&board[2]==="o"){
-    console.log("The winner is O")
+    renderWinnerO();
   }else if (board[3]==="o" && board[4]==="o" && board[5]==="o") {
-    console.log("The winner is O")
+    renderWinnerO();
   }else if (board[6]==="o" && board[7]==="o" && board[8]==="o") {
-    console.log("The winner is O")
+    renderWinnerO();
   }else if (board[0]==="o" && board[3]==="o" && board[6]==="o") {
-    console.log("The winner is O")
+    renderWinnerO();
   }else if (board[1]==="o" && board[4]==="o" && board[7]==="o") {
-    console.log("The winner is O")
+    renderWinnerO();
   }else if (board[2]==="o" && board[5]==="o" && board[8]==="o") {
-    console.log("The winner is O")
+    renderWinnerO();
   }else if (board[0]==="o" && board[4]==="o" && board[8]==="o") {
-    console.log("The winner is O")
+    renderWinnerO();
   }else if (board[2]==="o" && board[4]==="o" && board[6]==="o") {
-    console.log("The winner is O")
+    renderWinnerO();
   }else if (board[0]==="x" && board[1]==="x" &&board[2]==="x"){
-    console.log("the winner is X")
+    renderWinnerX();
   }else if (board[3]==="x" && board[4]==="x" && board[5]==="x") {
-    console.log("the winner is X")
+    renderWinnerX();
   }else if (board[6]==="x" && board[7]==="x" && board[8]==="x") {
-    console.log("the winner is X")
+    renderWinnerX();
   }else if (board[0]==="x" && board[3]==="x" && board[6]==="x") {
-    console.log("the winner is X")
+    renderWinnerX();
   }else if (board[1]==="x" && board[4]==="x" && board[7]==="x") {
-    console.log("the winner is X")
+    renderWinnerX();
   }else if (board[2]==="x" && board[5]==="x" && board[8]==="x") {
-    console.log("the winner is X")
+    renderWinnerX();
   }else if (board[0]==="x" && board[4]==="x" && board[8]==="x") {
-    console.log("the winner is X")
+    renderWinnerX();
   }else if (board[2]==="x" && board[4]==="x" && board[6]==="x") {
-    console.log("the winner is X")
+    renderWinnerX();
   }else if(board.includes("") === false){
     console.log("It's a draw")
   }
+}
+
+function renderWinnerX(){
+  const container = document.querySelector(".container");
+  const div = document.createElement("div");
+div.classList.add("winner");
+  const h2 = document.createElement("h2");
+  h2.innerHTML = "Winner is";
+  const x = document.createElement("h1");
+  x.innerHTML = "X"
+setTimeout(()=>{
+  container.appendChild(div);
+  div.appendChild(h2);
+  div.appendChild(x);
+  },500
+)
+  setTimeout(function() {container.removeChild(div)}, 3000);
+  setTimeout(function() {Restart();}, 4000);
+}
+
+function renderWinnerO(){
+  const container = document.querySelector(".container");
+  const div = document.createElement("div");
+div.classList.add("winner");
+  const h2 = document.createElement("h2");
+  h2.innerHTML = "Winner is";
+  const x = document.createElement("h1");
+  x.innerHTML = "O"
+setTimeout(()=>{
+  container.appendChild(div);
+  div.appendChild(h2);
+  div.appendChild(x);
+  },500
+)
+  setTimeout(function() {container.removeChild(div)}, 3000);
+  setTimeout(function() {Restart();}, 4000);
 }
