@@ -14,24 +14,18 @@ const Player = (name, marker)=>{
     name, marker
   }
 };
+
 const restart = document.querySelector(".restart");
 restart.addEventListener("click", ()=>{
   Restart();
   });
-const Restart = ()=>{         //debug the restart!!!
 
+const Restart = ()=>{
     Gameboard.gameboard = ["","","","","","","","",""];
-    // const player1 = Player("Player 1", "");
-    // const player2 = Player("Player 2", "");
-
     gridItem.forEach((item, i) => {
-      item.innerHTML = "";
-
-
+    item.innerHTML = "";
   })
-
 };
-
 
 const SelectMarker = (()=>{
   const xButton = document.querySelector(".x-mark");
@@ -50,9 +44,8 @@ const SelectMarker = (()=>{
       playWithPC();
     }else{
       playWithHuman();
-}
-
-  })
+      }
+    })
   oButton.addEventListener("click", ()=>{
 
     const difficulty = selectDif.value;
@@ -64,11 +57,10 @@ const SelectMarker = (()=>{
     console.log(opponent,difficulty);
     currentPlayer = 2;
     if(opponent === "PC"){
-      playWithPC();
+      fisrtMoveO();
     }else{
       playWithHuman();
     }
-
   })
 })();
 
@@ -128,7 +120,21 @@ gridItem.forEach((item, i) => {
 });
 };
 
+function fisrtMoveO(){
 
+    randomGrid();
+    console.log(randomNumber);
+    if(Gameboard.gameboard[randomNumber]===""){
+      for (x=0;x<=gridItem.length;x++){
+        gridItem[randomNumber].innerHTML = Game.player2.marker;
+        Gameboard.gameboard[randomNumber] = Game.player2.marker;
+        console.log(Gameboard.gameboard);
+        currentPlayer = 1;
+        checkIfWins();
+        playWithPC();
+      }
+    }
+}
 const Game = (()=>{
   const player1 = Player("Player 1", "");
   const player2 = Player("Player 2", "");
