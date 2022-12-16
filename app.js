@@ -2,6 +2,9 @@ const gridItem = document.querySelectorAll(".grid-item");
 const selectOpp = document.querySelector("#select-opponent");
 const selectDif = document.querySelector("#select-difficulty");
 const body = document.querySelector("body");
+const gameBoard = document.querySelector(".game-board");
+const selections = document.querySelector(".selections");
+const chooseMark = document.querySelector(".choose-mark");
 let currentPlayer;
 let randomNumber;
 
@@ -25,6 +28,9 @@ const Restart = ()=>{
     Gameboard.gameboard = ["","","","","","","","",""];
     gridItem.forEach((item, i) => {
     item.innerHTML = "";
+    gameBoard.style.filter = "blur(0)";
+    selections.style.filter = "blur(0)";
+    chooseMark.style.filter = "blur(0)";
 
   })
 };
@@ -181,7 +187,7 @@ function checkIfWins(){
   }else if (board[2]==="x" && board[4]==="x" && board[6]==="x") {
     renderWinnerX();
   }else if(board.includes("") === false){
-    console.log("It's a draw")
+    draw();
   }
 }
 
@@ -197,8 +203,13 @@ setTimeout(()=>{
   container.appendChild(div);
   div.appendChild(h2);
   div.appendChild(x);
-  },500
+  gameBoard.style.filter = "blur(2px)";
+  selections.style.filter = "blur(2px)";
+  chooseMark.style.filter = "blur(2px)";
+},300
 )
+
+
   setTimeout(function() {container.removeChild(div)}, 3000);
   setTimeout(function() {Restart();}, 4000);
 }
@@ -215,7 +226,28 @@ setTimeout(()=>{
   container.appendChild(div);
   div.appendChild(h2);
   div.appendChild(x);
-  },500
+  gameBoard.style.filter = "blur(2px)";
+  selections.style.filter = "blur(2px)";
+  chooseMark.style.filter = "blur(2px)";
+},300
+)
+  setTimeout(function() {container.removeChild(div)}, 3000);
+  setTimeout(function() {Restart();}, 4000);
+}
+
+function draw(){
+  const container = document.querySelector(".container");
+  const div = document.createElement("div");
+div.classList.add("winner");
+  const h2 = document.createElement("h2");
+  h2.innerHTML = "It's a Draw";
+setTimeout(()=>{
+  container.appendChild(div);
+  div.appendChild(h2);
+  gameBoard.style.filter = "blur(2px)";
+  selections.style.filter = "blur(2px)";
+  chooseMark.style.filter = "blur(2px)";
+},300
 )
   setTimeout(function() {container.removeChild(div)}, 3000);
   setTimeout(function() {Restart();}, 4000);
