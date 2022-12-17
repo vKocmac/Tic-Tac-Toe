@@ -11,6 +11,7 @@ display: grid;
 grid-template-columns: 1fr 1fr 1fr;
 grid-template-rows: 1fr 3fr 1fr;
 align-items: center;
+justify-content:center;
 margin: 0 auto;
 height: 80vh;
 width: 75vw;
@@ -33,12 +34,18 @@ background: white;
   grid-row: 1/2;
   border-bottom: 1px outset;
   padding-bottom: 10px;
+  display:flex;
+  min-height: 10%;
+  min-width:375px;
+  align-items: center;
+  justify-content: space-around;
 }
+
 .game-board{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(125px,1fr));
-  height: 375px;
-  width:375px;
+  /* height: 375px;
+  width:375px; */
   border-style: none;
   margin-top: 20px;
   padding-bottom: 20px;
@@ -78,13 +85,6 @@ background: white;
 }
 .game-board div:nth-child(n+4){
   border-bottom:none;
-}
-.choose-mark{
-  display:flex;
-  min-height: 10%;
-  min-width:375px;
-  align-items: center;
-  justify-content: space-around;
 }
 
 .grid-item{
@@ -160,11 +160,42 @@ font-size: 1rem;
   flex-direction: column;
   align-items: center;
   border-radius: 20px;
-  
+
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
 
 }
 .winner h1,h2{
   margin:0;
+}
+
+@media only screen and (max-width: 680px) {
+  .container{
+    grid-template-rows: 1fr 3fr 1fr 1fr;
+    margin:auto;
+    width:95%;
+  }
+  .selections{
+    grid-column: 2/3;
+    grid-row: 4/5;
+    display: flex;
+    padding: 0;
+    margin:0;
+    justify-content: space-between;
+    justify-self:center;
+    gap:30px;
+  }
+  .select-difficulty{
+    margin-top: 0;
+  }
+  .select-opponent{
+    margin-left: 0;
+  }
+
+}
+
+@media only screen and (max-width: 1000px){
+  .selections{
+    margin-right: 10px;
+  }
 }
