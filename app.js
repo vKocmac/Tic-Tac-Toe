@@ -27,11 +27,14 @@ restart.addEventListener("click", ()=>{
 
 const Restart = ()=>{
     Gameboard.gameboard = ["","","","","","","","",""];
+    board = Gameboard.gameboard;
     gridItem.forEach((item, i) => {
     item.innerHTML = "";
     gameBoard.style.filter = "blur(0)";
     selections.style.filter = "blur(0)";
     chooseMark.style.filter = "blur(0)";
+
+
 
   })
 };
@@ -155,9 +158,6 @@ function fisrtMoveO(){
       }
     }
 }
-
-
-
 
 const Game = (()=>{
   const player1 = Player("Player 1", "");
