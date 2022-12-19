@@ -8,11 +8,12 @@ const chooseMark = document.querySelector(".choose-mark");
 let currentPlayer;
 let randomNumber;
 
+
 const Gameboard = (()=>{
   const gameboard = ["","","","","","","","",""];
   return {gameboard};
 })();
-
+let board = Gameboard.gameboard;
 const Player = (name, marker)=>{
   return {
     name, marker
@@ -48,11 +49,13 @@ const SelectMarker = (()=>{
     console.log(Game.player1,Game.player2);
     console.log(opponent,difficulty);
     currentPlayer = 1;
-    if(opponent === "PC"){
+    if(opponent === "PC" && difficulty === "easy"){
       playWithPC();
-    }else{
+    }else if(opponent === "Human"){
       playWithHuman();
-      }
+    }else if(opponent === "PC" && difficulty === "unbeatable"){
+      unbeatable();
+    }
     })
   oButton.addEventListener("click", ()=>{
 
@@ -64,11 +67,13 @@ const SelectMarker = (()=>{
     console.log(Game.player1,Game.player2);
     console.log(opponent,difficulty);
     currentPlayer = 2;
-    if(opponent === "PC"){
-      fisrtMoveO();
-    }else{
-      playWithHuman();
-    }
+    if(opponent === "PC" && difficulty === "easy"){
+        fisrtMoveO();
+      }else if(opponent === "Human"){
+        playWithHuman();
+      }else if(opponent === "PC" && difficulty === "unbeatable"){
+        fisrtMoveO();
+      }
   })
 })();
 
@@ -140,11 +145,19 @@ function fisrtMoveO(){
         Gameboard.gameboard[randomNumber] = Game.player2.marker;
         console.log(Gameboard.gameboard);
         currentPlayer = 1;
-        checkIfWins();
-        playWithPC();
+        if(selectOpp.value === "PC" && selectDif.value === "easy"){
+            playWithPC();
+          }else{
+            unbeatable()
+          }
+
+
       }
     }
 }
+
+
+
 
 const Game = (()=>{
   const player1 = Player("Player 1", "");
@@ -189,6 +202,7 @@ function checkIfWins(){
   }else if(board.includes("") === false){
     draw();
   }
+
 }
 
 function renderWinnerX(){
@@ -252,3 +266,151 @@ setTimeout(()=>{
   setTimeout(function() {container.removeChild(div)}, 3000);
   setTimeout(function() {Restart();}, 4000);
 }
+
+// Unbeatable section
+
+function getAllboardIndexes() {
+  board = Gameboard.gameboard.filter((i) => i === "");
+  console.log(board);
+return board;
+}
+
+function evaluate(){
+  const board = Gameboard.gameboard;
+  if       (board[0]==="o" && board[1]==="o" &&board[2]==="o"){
+    return -10;
+  }else if (board[3]==="o" && board[4]==="o" && board[5]==="o") {
+    return -10;
+  }else if (board[6]==="o" && board[7]==="o" && board[8]==="o") {
+    return -10;
+  }else if (board[0]==="o" && board[3]==="o" && board[6]==="o") {
+    return -10;
+  }else if (board[1]==="o" && board[4]==="o" && board[7]==="o") {
+    return -10;
+  }else if (board[2]==="o" && board[5]==="o" && board[8]==="o") {
+    return -10;
+  }else if (board[0]==="o" && board[4]==="o" && board[8]==="o") {
+    return -10;
+  }else if (board[2]==="o" && board[4]==="o" && board[6]==="o") {
+    return -10;
+  }else if (board[0]==="x" && board[1]==="x" &&board[2]==="x"){
+    return +10;
+  }else if (board[3]==="x" && board[4]==="x" && board[5]==="x") {
+    return +10;
+  }else if (board[6]==="x" && board[7]==="x" && board[8]==="x") {
+    return +10;
+  }else if (board[0]==="x" && board[3]==="x" && board[6]==="x") {
+    return +10;
+  }else if (board[1]==="x" && board[4]==="x" && board[7]==="x") {
+    return +10;
+  }else if (board[2]==="x" && board[5]==="x" && board[8]==="x") {
+    return +10;
+  }else if (board[0]==="x" && board[4]==="x" && board[8]==="x") {
+    return +10;
+  }else if (board[2]==="x" && board[4]==="x" && board[6]==="x") {
+    return +10;
+  }else{
+    return 0;
+  }
+}
+
+const unbeatable = ()=>{
+console.log("You are playing with a machine");
+gridItem.forEach((item, i) => {
+  item.addEventListener("click", ()=>{
+    if(item.innerHTML === ""){
+      if (currentPlayer === 1){
+        Gameboard.gameboard[i] = Game.player1.marker;
+          item.innerHTML = Game.player1.marker;
+          currentPlayer=2;
+          checkIfWins();
+          let bestMove = findBestMove(board);
+
+          console.log(bestMove.index);
+          if(Gameboard.gameboard[bestMove.index]===""){
+            for (x=0;x<=gridItem.length;x++){
+              setTimeout(function() {gridItem[bestMove.index].innerHTML=Game.player2.marker;}, 500);
+              // gridItem[randomNumber].innerHTML = Game.player2.marker;
+              Gameboard.gameboard[bestMove.index] = Game.player2.marker;
+              console.log(Gameboard.gameboard);
+              currentPlayer = 1;
+              checkIfWins();
+            }
+          }
+      }
+    }
+  });
+});
+};
+
+function findBestMove(board){
+let bestVal = -1000;
+let bestMove = new Move();
+bestMove.index = -1;
+
+ // let bestVal = -Infinity;
+
+    for(let i =0;i<=9;i++){
+      if(board[i] == "" ){
+        board[i] = "x";
+        let moveVal = minimax(board,0, false);
+        board[i]="";
+        if (moveVal > bestVal)
+        {
+            bestMove.index = i;
+            bestVal = moveVal;
+
+        }
+      }
+
+ };
+  return bestMove;
+         }
+
+
+
+
+function minimax(board,depth,isMax){
+
+  let score = evaluate(board);
+
+  if (score == 10)
+      return score;
+
+  if (score == -10)
+      return score;
+
+  if (board.includes("") === false)
+      return 0;
+
+  if (isMax){
+    bestVal = -1000;
+    for(let i =0;i<=9;i++) {
+      if (board[i]===""){
+        board[i] = "x";
+        bestVal = Math.max( bestVal, minimax(board,depth+1,!isMax));
+        board[i]="";
+      }
+
+    };
+    return bestVal;
+  }else{
+    bestVal = 1000;
+      for(let i =0;i<=9;i++) {
+      if (board[i]===""){
+      board[i] = "o";
+      bestVal = Math.min( bestVal, minimax(board,depth+1,isMax))
+      board[i]="";
+    }
+    };
+    return bestVal
+   }
+}
+
+  class Move
+  {
+      constructor()
+      {
+          let index;
+      }
+  }
