@@ -56,8 +56,8 @@ const SelectMarker = (()=>{
       playWithPC();
     }else if(opponent === "Human"){
       playWithHuman();
-    }else if(opponent === "PC" && difficulty === "unbeatable"){
-      unbeatable();
+    }else if(opponent === "PC" && difficulty === "medium"){
+      medium();
     }
     })
   oButton.addEventListener("click", ()=>{
@@ -74,7 +74,7 @@ const SelectMarker = (()=>{
         fisrtMoveO();
       }else if(opponent === "Human"){
         playWithHuman();
-      }else if(opponent === "PC" && difficulty === "unbeatable"){
+      }else if(opponent === "PC" && difficulty === "medium"){
         fisrtMoveO();
       }
   })
@@ -151,7 +151,7 @@ function fisrtMoveO(){
         if(selectOpp.value === "PC" && selectDif.value === "easy"){
             playWithPC();
           }else{
-            unbeatable()
+            medium()
           }
 
 
@@ -267,7 +267,7 @@ setTimeout(()=>{
   setTimeout(function() {Restart();}, 4000);
 }
 
-// Unbeatable section
+// medium section
 
 function getAllboardIndexes() {
   board = Gameboard.gameboard.filter((i) => i === "");
@@ -314,7 +314,7 @@ function evaluate(){
   }
 }
 
-const unbeatable = ()=>{
+const medium = ()=>{
 console.log("You are playing with a machine");
 gridItem.forEach((item, i) => {
   item.addEventListener("click", ()=>{
